@@ -6,7 +6,7 @@ import { Stripe } from "stripe";
 const SOURCE_STRIPE_SECRET_KEY: string = process.env.SOURCE_STRIPE_SECRET_KEY as string;
 
 const stripe = new Stripe(SOURCE_STRIPE_SECRET_KEY, {
-  apiVersion: "2023-10-16"
+  apiVersion: "2026-09-30.endive"
 });
 
 const logFailedUnpause = (subscriptionId: string, errorMessage: string) => {
