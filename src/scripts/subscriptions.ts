@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import * as dotenv from "dotenv";
+import { getSubscriptionPeriodEnd } from './stripeSubscriptionPeriod';
 dotenv.config();
 import { SUBSCRIPTIONS_CONFIG } from "../config";
 import fs from "fs";
@@ -236,7 +237,7 @@ export function convertToSubscriptionCreateParams(
   //if the subscription is active, we need to set a free trial so customer 
   // is not charged directly after the migration
   if (subscription.status === "active") {
-    createSubscriptionParams.trial_end = subscription.current_period_end
+    createSubscriptionParams.trial_end = (getSubscriptionPeriodEnd(subscription))
   }
 
   /**

@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import * as dotenv from "dotenv";
+import { getCouponId } from './stripeSubscriptionPeriod';
 dotenv.config();
 
 interface IPromotionCodeListRequestParams {
@@ -22,7 +23,7 @@ function convertToPromotionCodeCreateParams(
 ): Stripe.PromotionCodeCreateParams {
   // start with an empty object
   let promotionCodeCreateParams: Stripe.PromotionCodeCreateParams = {
-    coupon: promotion_code.coupon.id,
+    coupon: (getCouponId(promotion_code)),
   };
 
   if (promotion_code.code) {

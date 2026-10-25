@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import * as dotenv from "dotenv";
+import { getProductMarketingFeatures } from './stripeSubscriptionPeriod';
 dotenv.config();
 
 interface IProductListRequestParams {
@@ -34,7 +35,7 @@ function convertToProductCreateParams(
 
   //default price is not implemented yet (to avoid conflicts with prices migration)
 
-  const features = product.features as Stripe.Product.Feature[];
+  const features = (getProductMarketingFeatures(product)) as Stripe.Product.Feature[];
 
   const filteredFeatures: Stripe.ProductCreateParams.Feature[] = features
     .filter((feature) => feature.name !== undefined)
